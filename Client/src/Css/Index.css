@@ -1,0 +1,40 @@
+/* These represent the global variables */
+:root
+{
+    --bgColor : #232323;
+    --textColor : #ffc9c9;
+    --chatBoxBackgroundColor : #3a3a3a;
+    --chatBoxBorderColor : #000000;
+    --chatBoxColor : #000000;
+    --receiveMessageBorderColor : #000000;
+    --receiveMessageColor : #000000;
+    --sentMessageBorderColor : #000000;
+    --sentMessageColor : #000000;
+    --sendBoxColor : #000000;
+
+    background: var(--bgColor);
+}
+
+#root
+{
+    background: var(--bgColor);
+}
+
+#message
+{
+    background: #000000;
+    color: var(--textColor);
+}
+#message.sent
+{
+    background: var(--sentMessageColor);
+}
+#message.received
+{
+    background: var(--receiveMessageColor);
+}
+
+h1,h2
+{
+    color: var(--textColor);
+}
