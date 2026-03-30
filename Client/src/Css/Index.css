@@ -3,11 +3,12 @@
 {
     --bgColor : #232323;
     --textColor : #ffc9c9;
-    --chatBoxBackgroundColor : #3a3a3a;
+    --chatBoxBackgroundColor : #765a5a;
     --chatBoxBorderColor : #000000;
     --chatBoxColor : #000000;
     --receiveMessageBorderColor : #000000;
-    --receiveMessageColor : #000000;
+    --receiveMessageBgColor : #000000;
+    --receiveMessageColor : #fefefe;
     --sentMessageBorderColor : #000000;
     --sentMessageColor : #000000;
     --sendBoxColor : #000000;

@@ -3,12 +3,7 @@
 //import viteLogo from './assets/vite.svg'
 //import heroImg from './assets/hero.png'
 import './Css/App.css'
-import {ProfileHolder, TextInputBar} from './Components/ChatPageComponents'
-
-function HelloReturner() : string
-{
-  return "Hello World!";
-}
+import ChatPage from './Components/ChatPage';
 
 function TestApp()
 {
@@ -18,12 +13,7 @@ function TestApp()
         <h1> {HelloReturner()} </h1>
       </section>
       <ProfileHolder /> */}
-
-      <div id="chatWindow">
-        <div id="messagesList">
-        </div>
-        <TextInputBar />
-      </div>
+      <ChatPage />
     </>
   )
 
