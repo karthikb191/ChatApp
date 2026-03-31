@@ -1,5 +1,7 @@
 //import React from 'react'
 
+import React, { useState, useCallback } from "react";
+
 type TextProps =
 {
     data : string;
@@ -8,7 +10,7 @@ type TextProps =
 
 type SendButtonProps = 
 {
-    onClick : () => void;
+    onClick : (arg0: string) => void;
 };
 
 function ProfileHolder()
@@ -32,12 +34,26 @@ function TextComponent(props : TextProps)
 
 function TextInputBar(props : SendButtonProps)
 {
+    const [textInput, SetInputText] = useState('');
+
+    const HandleClick = () =>{
+        props.onClick(textInput);
+        SetInputText('');
+    }
+
+    const HandleTextChange = useCallback<React.ChangeEventHandler<HTMLInputElement>>(
+        (event)=>{
+            SetInputText(event.target.value);
+        }
+        , [SetInputText]
+    )
+
     return (
         <>
         <div id = "textInputContainer">
-            <input id="inputField" type="text" minLength={1} maxLength={256} >
+            <input id="inputField" type="text" minLength={1} maxLength={256} value={textInput} onChange={HandleTextChange} >
             </input>
-            <input id="sendButton" type="button" onClick={props.onClick}/>
+            <input id="sendButton" type="button" onClick={HandleClick}/>
         </div>
         </>
     )

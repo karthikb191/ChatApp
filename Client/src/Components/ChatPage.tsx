@@ -33,9 +33,13 @@ class ChatPage extends React.Component
         );
     }
 
-    onSendClicked = () =>
+    onSendClicked = (messageData: string) =>
     {
-        this.addMessage((this.messageHolder.length + 1).toString())
+        if(messageData.length == 0)
+        {
+            return;
+        }
+        this.addMessage(messageData)
         this.setState({messageHolder: this.messageHolder})
         
         // messageHolder.map(
