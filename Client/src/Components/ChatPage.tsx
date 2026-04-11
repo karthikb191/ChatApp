@@ -1,6 +1,5 @@
 import React from "react";
-import { useState } from 'react';
-import {ProfileHolder, TextInputBar, TextComponent} from './ChatPageComponents'
+import {TextInputBar, TextComponent} from './ChatPageComponents'
 
 
 class ChatPage extends React.Component
