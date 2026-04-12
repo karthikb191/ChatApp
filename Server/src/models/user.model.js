@@ -29,7 +29,7 @@ var userSchema = new mongoose.Schema(
 
 // User is transformed to users to refer to the collection in the database 
 //Model based off the user schema
-var userModel = mongoose.model("User", userSchema);
+var UserModel = mongoose.model("User", userSchema);
 
 
-export default userModel;
+export default UserModel;
