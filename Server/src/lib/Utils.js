@@ -16,6 +16,7 @@ const CreateToken = (payload, res) => {
         }
     );
 
+    //TODO: Read about cookies
     res.cookie('jwt',
         signedToken,
         {

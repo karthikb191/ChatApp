@@ -2,6 +2,7 @@ import express from 'express'
 import UserModel from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 import { CreateToken } from '../lib/Utils.js';
+import mongoose from 'mongoose';
 
 /**
  * 
@@ -69,9 +70,42 @@ export const signUp = async (req, res) =>
  * @param {express.Request} req 
  * @param {express.Response} res 
  */
-export const signIn = (req, res) => 
-{   
-    res.send("auth - signin");
+export const signIn = async (req, res) => 
+{
+    const {email, password} = req.body
+    
+    try
+    {
+        const user = await UserModel.findOne({email});
+        if(!user)
+        {
+            res.status(400).json({error : "User not found"});
+        }
+
+        //Password validation
+        const isCorrect = bcrypt.compare(password, user.password);
+        if(!isCorrect)
+        {
+            res.status(400).json({error : "Invalid Password"});
+        }
+
+        //Refresh JWT token since password is correct
+        CreateToken(user._id, res);
+            
+        //User is found. Return his data
+        res.status(200).json(
+            {
+                message: "Signin Successful",
+                _id : user._id,
+                email : user.email,
+                username : user.username
+            }
+        )
+    }
+    catch(e)
+    {
+        res.status(500).json({error: "Internal server error when signing in"});
+    }
 }
 
 /**
@@ -81,5 +115,13 @@ export const signIn = (req, res) =>
  */
 export const signOut = (req, res) => 
 {
-    res.send("auth - signout");
+    try
+    {
+        res.cookie("jwt", "", {maxAge:0});
+        res.status(200).json({message: "Signout successful"});
+    }
+    catch(e)
+    {
+        res.status(500).json({error: "Internal server error when signing out"});
+    }
 }

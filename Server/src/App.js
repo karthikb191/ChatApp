@@ -54,7 +54,7 @@ app.listen(PORT,
         }
         
         console.log("Server is running");
-        ConnectMongoDB("db_users");
+        ConnectMongoDB(process.env.USERS_DATABASE);
     }
 )
 
