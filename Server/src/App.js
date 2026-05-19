@@ -9,6 +9,7 @@
 import express from 'express';
 import path from 'path'
 import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser';
 
 //TODO: Use .env file once we have database setup
 import config from './../Config.json' with { type: 'json' }
@@ -31,6 +32,7 @@ var app = express();
 
 //This is used to parse the request body
 app.use(express.json());
+app.use(cookieParser()); //This allows us to parse the cookies.... But what'e the link to the middleware here?
 
 //Routing setup
 app.use("/", indexRouter);

@@ -6,11 +6,11 @@ import express from "express"
  * @param {any} payload 
  * @param {express.Response} res 
  */
-const CreateToken = (payload, res) => {
+const CreateToken = (userId, res) => {
     
-    console.log("Payload:" + payload);
+    console.log("Payload:" + userId);
 
-    const signedToken = jws.sign({payload}, process.env.JWT_SECRET, 
+    const signedToken = jws.sign({userId}, process.env.JWT_SECRET, 
         {
             expiresIn: "7d"
         }

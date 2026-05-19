@@ -104,6 +104,7 @@ export const signIn = async (req, res) =>
     }
     catch(e)
     {
+        console.log("ERROR when signing in: " + e.message);
         res.status(500).json({error: "Internal server error when signing in"});
     }
 }
@@ -124,4 +125,14 @@ export const signOut = (req, res) =>
     {
         res.status(500).json({error: "Internal server error when signing out"});
     }
+}
+
+/**
+ * 
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ */
+export const updateProfile = async (req, res) => 
+{
+    res.status(200).json({message: "Update call successful. Nothing changed"});
 }
