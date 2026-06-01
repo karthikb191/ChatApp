@@ -1,20 +1,26 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose"
 
 var messageSchema = new mongoose.Schema(
 {
     senderId: {
-        type : String,
-        required : true
+        type : Schema.Types.ObjectId,
+        required : true,
+        ref : "User"
     },
     receiverId: {
-        type : String,
-        required : true
+        type : Schema.Types.ObjectId,
+        required : true,
+        ref : "User"
     },
-    message: String,
-
+    text: 
+    {
+        type : String
+    }
     //TODO: Add an image
-});
+},
+{timestamps: true}
+);
 
-var messageModel = new mongoose.model("Message", messageSchema);
+var MessageModel = mongoose.model("Message", messageSchema);
 
-export default messageModel;
+export default MessageModel;

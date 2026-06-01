@@ -5,20 +5,26 @@
 import './Css/App.css'
 import ChatPage from './Components/ChatPage';
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import LoginPage from './Components/Pages/LoginPage';
+
 function TestApp()
 {
+
+
+
   return (
     <>
-      {/* <section id="center">
-        <h1> {HelloReturner()} </h1>
-      </section>
-      <ProfileHolder /> */}
-      <ChatPage />
+      <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<LoginPage />} />
+        <Route path='/chat' element={<ChatPage />} />
+      </Routes>
+      </BrowserRouter>
     </>
   )
 
 }
-
 
 
 // function App() {

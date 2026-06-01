@@ -1,0 +1,12 @@
+Questions encountered during Implementation:
+
+SERVER: 
+1. How to Add filters or conditions when using .find() function
+- The first parameter taken is called a filter. Mongoose casts this to match your schema, but in the end it's passed to 
+MongoDB as a Query Predicate json.
+When executing a query, you specify your query as a JSON document. The JSON document's syntax is the same as the MongoDB shell.
+
+refs: 
+    https://mongoosejs.com/docs/queries.html
+    https://www.mongodb.com/docs/manual/tutorial/query-documents/
+    https://www.mongodb.com/docs/manual/reference/mql/query-predicates/

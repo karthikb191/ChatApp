@@ -18,6 +18,7 @@ import config from './../Config.json' with { type: 'json' }
 //Application route imports
 import indexRouter from './routes/index.route.js';
 import authRoute from './routes/auth.route.js'
+import messageRoute from './routes/messages.route'
 
 //Databases
 import { ConnectMongoDB } from './lib/ConnectDB.js';
@@ -37,6 +38,7 @@ app.use(cookieParser()); //This allows us to parse the cookies.... But what'e th
 //Routing setup
 app.use("/", indexRouter);
 app.use("/api/auth/", authRoute);
+app.use("/api/messages/", messageRoute);
 
 //view engine setup
 app.set('views', path.join(__dirName, 'views'));

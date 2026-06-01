@@ -135,4 +135,25 @@ export const signOut = (req, res) =>
 export const updateProfile = async (req, res) => 
 {
     res.status(200).json({message: "Update call successful. Nothing changed"});
+
+    //TODO: Update profile pic here once it's implemented
+}
+
+/**
+ * 
+ * @param {express.Request} req 
+ * @param {express.Response} res 
+ */
+export const checkUser = async (req, res) => 
+{
+    try
+    {
+        res.status(200).json(req.user);
+    }
+    catch(error)
+    {
+        console.log("Exception when validating user: " + error.message);
+        res.status(500).json({error: "Exception when validating user"});
+    }
+    //TODO: Update profile pic here once it's implemented
 }

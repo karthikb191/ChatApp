@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 type TextEntryProps =
 {
@@ -21,10 +21,7 @@ function LoginPage()
 {
     return (
         <>
-            <div className="Auth">
-                <TextEntryBoxComponent label={"user name"}></TextEntryBoxComponent>
-                <TextEntryBoxComponent label={"password"}></TextEntryBoxComponent>
-            </div>
+        <h1> This is Login page </h1>
         </>
     )
 }
