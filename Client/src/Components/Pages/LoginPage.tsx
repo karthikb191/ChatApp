@@ -1,27 +1,30 @@
 
+import React from 'react'
+import { InputField, PasswordField } from '../InputComponents'
+import "../../App.css"
 
-type TextEntryProps =
+const InputFormContainer = () => 
 {
-    label: string
-};
-
-function TextEntryBoxComponent(props: TextEntryProps)
-{
- return (
-    <>
-        <div className='TextEntry'>
-            <p>{props.label} : </p>
-            <input type='text'></input>
+    return (
+    <div className="centerAlign">
+        <div className='inputEntry'>
+        <InputField id="UsernameField" placeholder="User Name / Email"></InputField>
         </div>
-    </>
- )
+        
+        <div className='inputEntry'>
+        <PasswordField
+                id="PasswordField" placeholder="Password"></PasswordField>
+        </div>
+    </div>
+    )
 }
 
 function LoginPage()
 {
     return (
         <>
-        <h1> This is Login page </h1>
+            <h1> This is Login page </h1>
+            <InputFormContainer />
         </>
     )
 }

@@ -10,3 +10,60 @@ refs:
     https://mongoosejs.com/docs/queries.html
     https://www.mongodb.com/docs/manual/tutorial/query-documents/
     https://www.mongodb.com/docs/manual/reference/mql/query-predicates/
+
+
+
+
+
+
+
+CLIENT:
+React:
+- React apps are made of components. React components are JS functions that return Markup.
+- React component tags must start with a Capital letter, while HTML tags start with a small letter.
+- React component cannot return multiple JSX tags. They need to be wrapped into a shared parent 
+like <div> </div> or <></>
+- In react, you specify a CSS class with "className" attribute, instead of "class" as in HTML.
+- You can use conditional to conditionally include JSX
+- Often, you want your component to remember some information and display it. eg, no. of times a button is clicked
+To do this, state must be added to the component.
+import { useState } from 'react';
+Now, state variables can be declared in component as: const [count, setCount] = useState(0);
+- useState gives us 2 things. First, count which is the current state and next, the function
+that lets us update it. The argument passed to useState sets the default value
+- If the component that uses state is rendered multiple times, each will get it's own state
+- Functions starting with "use" are called Hooks.
+- Hooks are more restrictive than other functions. You can only call Hooks at the top of your component
+- Often you'll need components that share data and update together
+- In the incresing counter on button click example, if we want both buttons to display same count,
+the state should be moved one level up to the closest component containing all of them.
+
+:: MyApp.JSX
+export default function MyApp() {
+  const [count, setCount] = useState(0);
+
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  return (
+    <div>
+      <h1>Counters that update together</h1>
+      <MyButton count={count} onClick={handleClick} />
+      <MyButton count={count} onClick={handleClick} />
+    </div>
+  );
+}
+
+:: MyButton.JSX
+function MyButton({ count, onClick }) {
+  return (
+    <button onClick={onClick}>
+      Clicked {count} times
+    </button>
+  );
+}
+
+In above snippet, both count and onClick are passed as attributes to MyButton.
+When onClick on button is called, it called the common handleClick function in parent.
+
