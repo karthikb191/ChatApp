@@ -12,6 +12,6 @@ authRoute.get('/signout', signOut);
 authRoute.put('/update-profile', protectRoute, updateProfile);
 
 //Called whenever we refresh the page. Checks whether user is authenticated. If not, he should be thrown out to login screen
-authRoute.put('/check', protectRoute, checkUser);
+authRoute.get('/check', protectRoute, checkUser);
 
 export default authRoute;

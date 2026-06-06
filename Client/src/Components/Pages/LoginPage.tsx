@@ -2,6 +2,7 @@
 import React from 'react'
 import { InputField, PasswordField } from '../InputComponents'
 import "../../App.css"
+import "../InputComponents.css"
 
 const InputFormContainer = () => 
 {
@@ -19,7 +20,7 @@ const InputFormContainer = () =>
     )
 }
 
-function LoginPage()
+const LoginPage = () =>
 {
     return (
         <>

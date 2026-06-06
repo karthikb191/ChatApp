@@ -10,6 +10,7 @@ import express from 'express';
 import path from 'path'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser';
+import cors from 'cors'
 
 //TODO: Use .env file once we have database setup
 import config from './../Config.json' with { type: 'json' }
@@ -18,7 +19,7 @@ import config from './../Config.json' with { type: 'json' }
 //Application route imports
 import indexRouter from './routes/index.route.js';
 import authRoute from './routes/auth.route.js'
-import messageRoute from './routes/messages.route'
+import messageRoute from './routes/messages.route.js'
 
 //Databases
 import { ConnectMongoDB } from './lib/ConnectDB.js';
@@ -34,6 +35,12 @@ var app = express();
 //This is used to parse the request body
 app.use(express.json());
 app.use(cookieParser()); //This allows us to parse the cookies.... But what'e the link to the middleware here?
+app.use(cors(
+{
+    origin: "http://localhost:5173",
+    credentials: true
+}
+))
 
 //Routing setup
 app.use("/", indexRouter);

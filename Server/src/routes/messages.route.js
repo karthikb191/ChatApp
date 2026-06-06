@@ -1,7 +1,7 @@
 import express from 'express'
 import protectRoute from '../middleware/auth.middleware.js'
 
-import {getUsers, sendMessage, fetchMessageHistory} from '../controllers/messages.controller'
+import {getUsers, sendMessage, fetchMessageHistory} from '../controllers/messages.controller.js'
 
 var messageRouter = express.Router();
 
