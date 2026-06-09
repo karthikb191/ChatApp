@@ -20,13 +20,13 @@ export const signUp = async (req, res) =>
         }
         if(password.length < 6)
         {
-            res.status(404).json({ error: "Password should be atleast 6 characters" }); 
+            return res.status(404).json({ error: "Password should be atleast 6 characters" }); 
         }
 
         const user = await UserModel.findOne({email});
         if(user)
         {
-            res.status(400).json({error : "Email already registered"});
+            return res.status(400).json({error : "Email already registered"});
         }
 
         //Encrypt the password
@@ -56,12 +56,12 @@ export const signUp = async (req, res) =>
         }
         else
         {
-            res.status(400).send({error: "Invalid user data"});
+            return res.status(400).send({error: "Invalid user data"});
         }
     }
     catch(error)
     {
-        res.status(404).json({ error: 'Unexpected exception ' + error}); 
+        res.status(404).send({ error: 'Unexpected exception '}); 
     }
 }
 

@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../Lib/axios.tsx";
+import type { AxiosError } from "axios";
+
+type SignupFormParams =
+{
+    username : string,
+    email : string,
+    password : string
+};
 
 class AuthContext
 {
@@ -13,6 +21,7 @@ class AuthContext
         this.LoggingInUpdateCallback = () => {}
         this.SigningUpUpdateCallback = () => {}
         this.AuthCheckUpdateCallback = () => {}
+        this.AuthUserUpdatedCallback = () => {}
     }
 
     GetAuthenticatedUser()
@@ -43,7 +52,9 @@ class AuthContext
         {
             console.log("Finished Auth Check");
             this.isCheckingAuth = false;
+
             this.AuthCheckUpdateCallback(this.isCheckingAuth);
+            this.AuthUserUpdatedCallback(this.authUser);
         }
         return false;    
     }
@@ -54,10 +65,29 @@ class AuthContext
         return false;
     }
 
-    async TrySignUp()
+    async TrySignUp(data : SignupFormParams)
     {
         console.log("Trying to signup");
-        return false;
+        
+        try
+        {
+            this.isSigningUp = true;
+            this.SigningUpUpdateCallback(this.isSigningUp);
+            const res = await axiosInstance.post("/auth/signup", data);
+            this.authUser = res.data;
+            this.AuthUserUpdatedCallback(this.authUser);
+        }
+        catch(error)
+        {
+            const err = error as AxiosError
+            console.log("Exception when signing up", err.response?.data);
+        }
+        finally
+        {
+            this.isSigningUp = false;
+            this.SigningUpUpdateCallback(this.isSigningUp);
+            console.log("Sign up complete")
+        }
     }
     
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -70,6 +100,8 @@ class AuthContext
     AuthCheckUpdateCallback : (checkingAuth : boolean) => void;
     SigningUpUpdateCallback : (signingUp : boolean) => void;
     LoggingInUpdateCallback : (loggingIn : boolean) => void;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    AuthUserUpdatedCallback : (authUser : any) => void;
 }
 
 const authContext = new AuthContext();
@@ -79,7 +111,9 @@ function useAuthContext()
      const [isSigningUp, setIsSigningUp] = useState(false);
      const [isLoggingIn, setIsLoggingIn] = useState(false);
      const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+     const [authUser, setAuthUser] = useState();
      const [checkAuth] = useState(() => () => authContext.CheckAuth());
+     const [signup] = useState(() => (data : SignupFormParams) => authContext.TrySignUp(data))
 
      useEffect(()=>{
         console.log("Auth context use effect running");
@@ -105,13 +139,21 @@ function useAuthContext()
                 setIsLoggingIn(loggingIn);
             }
         }
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        function SetAuthUser(authUser : any)
+        {
+            setAuthUser(authUser);
+        }
         
         authContext.AuthCheckUpdateCallback = AuthCheckUpdate;
         authContext.SigningUpUpdateCallback = SigningUp;
         authContext.LoggingInUpdateCallback = LoggingIn;
-     }, [isCheckingAuth, isSigningUp, isLoggingIn, checkAuth]);
+        authContext.AuthUserUpdatedCallback = SetAuthUser;
+     }, [isCheckingAuth, isSigningUp, isLoggingIn, checkAuth, authUser]);
      
-     return { isSigningUp, isLoggingIn, isCheckingAuth, checkAuth};
+     return { isSigningUp, isLoggingIn, isCheckingAuth, checkAuth, authUser, signup};
 };
 
 export {authContext, useAuthContext};
+export type {SignupFormParams};
