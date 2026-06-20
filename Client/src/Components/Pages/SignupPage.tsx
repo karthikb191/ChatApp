@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { InputField, PasswordField, SubmitButton } from '../InputComponents'
 import "../../App.css"
 import "../InputComponents.css"
-import {authContext, useAuthContext, type SignupFormParams} from './../../Store/authContext';
+import {useAuthContext, type SignupFormParams} from './../../Store/authContext';
 
 type SignupPageParams =
 {
@@ -50,7 +50,8 @@ const SignupFormContainer = ({handleFormSubmit} : SignupPageParams) =>
             </div>
 
             <div>
-                <SubmitButton name="signup" text="Signup"></SubmitButton>
+                <button type="submit"> Signup </button>
+                {/*<SubmitButton name="signup" text="Signup"></SubmitButton>*/}
             </div>
         </form>
     </div>

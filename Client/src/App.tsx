@@ -10,7 +10,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './Components/Pages/LoginPage';
 import SignupPage from './Components/Pages/SignupPage';
 import HomePage from './Components/Pages/HomePage';
-import {authContext, useAuthContext} from './Store/authContext';
+import {useAuthContext} from './Store/authContext';
 
 function TestApp()
 {
@@ -21,7 +21,7 @@ function TestApp()
   //Try to authenticate user as soon as we are in this page
   useEffect(()=>{
     console.log("Checking auth at the start of the application");
-    authContext.CheckAuth();
+    checkAuth();
   }, [checkAuth])
 
   console.log("Auth User: ", {authUser});
@@ -40,8 +40,8 @@ function TestApp()
       <BrowserRouter>
       <Routes>
         <Route path='/' element={ authUser ? <HomePage/> : <Navigate to={'/login'}/>} />
-        <Route path='/signup' element={ <SignupPage />} />
-        <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={ !authUser ? <SignupPage /> : <Navigate to={'/'}/>} />
+        <Route path='/login' element={ !authUser ? <LoginPage /> : <Navigate to={'/'}/>} />
         <Route path='/chat' element={ authUser ? <ChatPage/> : <Navigate to={'/login'}/>} />
       </Routes>
       </BrowserRouter>

@@ -3,29 +3,44 @@ import React, { useState } from 'react'
 import { InputField, PasswordField, SubmitButton } from '../InputComponents'
 import "../../App.css"
 import "../InputComponents.css"
-import {authContext, useAuthContext} from './../../Store/authContext';
+import {useAuthContext, type SigninFormParams} from './../../Store/authContext';
 
 type LoginPageParams =
 {
     onSubmitClick? : React.MouseEventHandler<HTMLButtonElement>;
-    onFormSubmit? : React.SubmitEventHandler<HTMLFormElement>;
+    handleFormSubmit? : (arg0: SigninFormParams)=>void;
 };
 
-const InputFormContainer = ({onSubmitClick, onFormSubmit} : LoginPageParams) => 
+const InputFormContainer = ({handleFormSubmit} : LoginPageParams) => 
 {
+    const [formData, setFormData] = useState(
+            {
+                email: "",
+                password: ""
+            }
+        );
+
+    function onFormSubmit(e : React.SubmitEvent<HTMLFormElement>)
+    {
+        e.preventDefault();
+        handleFormSubmit?.(formData);
+    }
+
     return (
     <div className="centerAlign">
         <form className="formArea centerAlign" onSubmit={onFormSubmit}>
             <div className='inputEntry'>
-            <InputField id="UsernameField" placeholder="User Name / Email"></InputField>
+            <InputField id="UsernameField" placeholder="Email" 
+                onChange={ (e) => setFormData({...formData, email: e.target.value})}></InputField>
             </div>    
             
             <div className='inputEntry'>
-            <PasswordField id="PasswordField" placeholder="Password"></PasswordField>
+            <PasswordField id="PasswordField" placeholder="Password"
+                onChange={(e) => setFormData({...formData, password: e.target.value})}></PasswordField>
             </div>
 
             <div>
-                <SubmitButton name="login" text="Login" onClick={onSubmitClick}></SubmitButton>
+                <SubmitButton name="login" text="Login"></SubmitButton>
             </div>
         </form>
     </div>
@@ -34,12 +49,7 @@ const InputFormContainer = ({onSubmitClick, onFormSubmit} : LoginPageParams) =>
 
 const LoginPage = () =>
 {
-    
-
-    function SubmitLogin()
-    {
-        console.log("Login button clicked");
-    }
+    const {isSigningIn, signin} = useAuthContext();
 
     // const [formData, setFormData] = useState(
     //     {
@@ -49,15 +59,16 @@ const LoginPage = () =>
     //     }
     // );
 
-    function HandleFormSubmit(e : React.SubmitEvent<HTMLFormElement>)
+    function HandleFormSubmit(signinParams : SigninFormParams)
     {
-        console.log("Submitting Form");
+        console.log("Performing Signin");
+        signin(signinParams);
     }
 
     return (
         <>
             <h1> This is Login page </h1>
-            <InputFormContainer onSubmitClick={SubmitLogin} onFormSubmit={HandleFormSubmit}/>
+            <InputFormContainer handleFormSubmit={HandleFormSubmit}/>
         </>
     )
 }
