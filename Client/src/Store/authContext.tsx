@@ -244,7 +244,7 @@ export const useAuthContext = create<AuthContextParams>(
                 finally
                 {
                     console.log("Finished Auth Check");
-                    set(() => ({isCheckingAuth: false}));
+                    set({ isCheckingAuth: false});
                 }
             },
 

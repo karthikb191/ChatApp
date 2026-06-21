@@ -67,3 +67,4 @@ function MyButton({ count, onClick }) {
 In above snippet, both count and onClick are passed as attributes to MyButton.
 When onClick on button is called, it called the common handleClick function in parent.
 
+- To clear site data, open inspect in chrome, go to Application tab. Select storage and there's an option to clear site data along with cookies

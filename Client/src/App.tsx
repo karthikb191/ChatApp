@@ -11,6 +11,7 @@ import LoginPage from './Components/Pages/LoginPage';
 import SignupPage from './Components/Pages/SignupPage';
 import HomePage from './Components/Pages/HomePage';
 import {useAuthContext} from './Store/authContext';
+import NavBar from './Components/NavBar.tsx';
 
 function TestApp()
 {
@@ -38,6 +39,7 @@ function TestApp()
   return (
     <>
       <BrowserRouter>
+      <NavBar/>
       <Routes>
         <Route path='/' element={ authUser ? <HomePage/> : <Navigate to={'/login'}/>} />
         <Route path='/signup' element={ !authUser ? <SignupPage /> : <Navigate to={'/'}/>} />
