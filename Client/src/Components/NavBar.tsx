@@ -14,7 +14,7 @@ const NavBar = () => {
             <div className="flex-row flex-fill center-align">
                 <div className="flex-fill text-center">
                     <Link to="/">
-                        <h3 text-color>Home</h3>
+                        <h3 className="text-color">Home</h3>
                     </Link>
                 </div>
 

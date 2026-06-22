@@ -67,7 +67,7 @@ const LoginPage = () =>
 
     return (
         <>
-            <h1> This is Login page </h1>
+            {/* <h1 className='text-center'> This is Login page </h1> */}
             <InputFormContainer handleFormSubmit={HandleFormSubmit}/>
         </>
     )

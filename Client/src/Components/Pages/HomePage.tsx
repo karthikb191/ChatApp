@@ -1,13 +1,14 @@
-import { SubmitButton } from '../InputComponents'
-import {useAuthContext} from './../../Store/authContext';
+import { SubmitButton } from "./../InputComponents.tsx"
+import {useAuthContext} from "./../../Store/authContext.tsx";
+import ChatPage from "./ChatPage.tsx"
 
 const HomePage = () =>
 {
-
     return (
         <>
-            <div className="centerAlign">
-                <h1> Chat page under construction.... </h1>        
+            <div className="centerAlign h-full center-stretch">
+                <h1 className="text-center"> Chat page under construction.... </h1>        
+                <ChatPage />
             </div>
         </>
     );

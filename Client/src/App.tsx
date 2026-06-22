@@ -3,7 +3,6 @@
 //import viteLogo from './assets/vite.svg'
 //import heroImg from './assets/hero.png'
 import './Css/App.css'
-import ChatPage from './Components/ChatPage';
 
 import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -44,7 +43,7 @@ function TestApp()
         <Route path='/' element={ authUser ? <HomePage/> : <Navigate to={'/login'}/>} />
         <Route path='/signup' element={ !authUser ? <SignupPage /> : <Navigate to={'/'}/>} />
         <Route path='/login' element={ !authUser ? <LoginPage /> : <Navigate to={'/'}/>} />
-        <Route path='/chat' element={ authUser ? <ChatPage/> : <Navigate to={'/login'}/>} />
+        <Route path='/chat' element={ authUser ? <HomePage/> : <Navigate to={'/login'}/>} />
       </Routes>
       </BrowserRouter>
     </>

@@ -1,6 +1,7 @@
 import React from "react";
-import {TextInputBar, TextComponent} from './ChatPageComponents'
-
+import {TextInputBar, TextComponent} from "./../ChatPageComponents.tsx"
+import "./../../App.css"
+import "./../CSS/ChatPage.css"
 
 class ChatPage extends React.Component
 {
